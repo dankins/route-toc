@@ -1,0 +1,21 @@
+{
+  "name": "route-toc",
+  "version": "0.0.1",
+  "authors": [
+    "Dan Kinsley <kinsleyd@gmail.com>"
+  ],
+  "description": "Element to render a nested list of states in the application",
+  "keywords": "polymer, web-components, router",
+  "main": "route-toc.html",
+  "license": "MIT",
+  "homepage": "https://github.com/SurfTV/route-toc",
+  "ignore": [
+    "**/.*",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.5",
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.3.3",
+    "route-link": "0.0.1"
+  }
+}

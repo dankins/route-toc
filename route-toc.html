@@ -1,0 +1,65 @@
+<link rel="import" href="../route-link/route-link.html">
+
+<polymer-element name="route-toc">
+
+    <template>
+        <style>
+            route-link[childActive] {
+                color: blue
+            }
+            route-link[active] {
+                font-weight: bold;
+                color: red !important;
+            }
+
+        </style>
+        <ul>
+            <template repeat="{{items}}" id="t">
+                <li><route-link state="{{$element.state}}" label="{{$element.label == undefined ? $element.state : $element.label}}" watch></route-link>
+                    <ul>
+                        <template ref="t" repeat="{{children}}"></template>
+                    </ul>
+                </li>
+            </template>
+        </ul>
+
+    </template>
+    <script>
+        Polymer('route-toc',{
+            items: {},
+            domReady: function(){
+                var process = function(obj){
+                  function fieldsToArr(c){
+                      var rtn = [];
+                      for (var name in obj) {
+                          if (obj.hasOwnProperty(name) && name != "$element") {
+                              rtn.push(obj[name]);
+                          }
+                      }
+                      return rtn;
+                  }
+
+                  var arr = fieldsToArr(obj);
+                  if(arr.length > 0){
+                      if(obj.$element != undefined){
+                          return {
+                              $element: obj.$element,
+                              children: arr.map(process)
+                          };
+                      } else {
+                          return arr.map(process);
+                      }
+
+                  } else {
+                      return obj;
+                  }
+
+                };
+
+                this.items = process(window.Route.children);
+            }
+        });
+
+    </script>
+
+</polymer-element>
